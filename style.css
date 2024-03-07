@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    background-color: #ccc;
+}
+header{
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+form input{
+    margin: 10px;
+    width: 100%;
+}
+.sSummary{
+    text-align: center;
+}
+.error{
+    border-color: red;
+    background-color: rgb(213, 114, 114);
+}

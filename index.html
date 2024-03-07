@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Reservas de Habitaciones</h1>
+    </header>
+    <hr>
+    <main>
+        <section class="sForm">
+            <form action="">
+
+
+                <label>
+                    Fecha de inicio de reserva:
+                    <input required class="fDate" type="date">
+                    <span class="fDateError" role="alert"></span>
+                </label>
+
+                <label>
+                    Fecha de fin de reserva:
+                    <input  class="eDate" type="date" required>
+                    <span class="eDateError" role="alert"></span>
+                </label>
+
+                <label>
+                    Número de personas adultas:
+                    <input class="nAdults" type="number" value=1 required><br>
+                    <span class="nAdultsError" role="alert"></span>
+                </label>
+
+                <label>
+                    Número de niños:
+                    <input class="nChilds" type="number" value=0 required><br>
+                    <span class="nChildsError" role="alert"></span>
+                </label>
+
+                <label>
+                    Habitación: 
+                    <select  class="sRooms" required>
+                    </select><br>
+                    <span class="nRoomsError" role="alert"></span>
+                </label>
+
+                <p class="price"></p>
+
+            </form>
+
+            <button class="btnReserve" >Reservar</button>
+
+        </section>
+        <section class="sSummary">
+
+            <h3>Tiempo de la sesión</h3>
+            <span class="timer" role="timer">10 : 00</span>
+
+            <hr>
+
+            <h3>Resumen:</h3>
+            <p>
+                <span class="summary" role="contentinfo"></span> <br>
+                <strong>21% IVA:</strong> <span class="summary" role="contentinfo"></span> <br>
+                <strong>Precio final:</strong><span class="summary" role="contentinfo"></span><br>
+            </p>
+        </section>
+
+    </main>
+
+    <script src="main.js" async defer></script>
+</body>
+
+</html>
