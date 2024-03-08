@@ -1,12 +1,14 @@
 // ----------DECLARATION-----------
-fDate = document.getElementsByClassName('fDate')[0];
-eDate = document.getElementsByClassName('eDate')[0];
-nAdults = document.getElementsByClassName('nAdults')[0];
-nChilds = document.getElementsByClassName('nChilds')[0];
-nRooms = document.getElementsByClassName('nRooms')[0];
-btnReserve = document.getElementsByClassName('btnReserve')[0];
+let fDate = document.getElementsByClassName('fDate')[0];
+let eDate = document.getElementsByClassName('eDate')[0];
+let nAdults = document.getElementsByClassName('nAdults')[0];
+let nChilds = document.getElementsByClassName('nChilds')[0];
+let nRooms = document.getElementsByClassName('nRooms')[0];
+let btnReserve = document.getElementsByClassName('btnReserve')[0];
+let btnReset = document.getElementsByClassName('btnReset')[0];
+let successText = document.getElementsByClassName('successText')[0];
 let fields = Array.from(document.querySelectorAll('input'));
-today = new Date();
+let today = new Date();
 let sRooms = document.getElementsByClassName('sRooms')[0];
 let price = document.getElementsByClassName('price')[0];
 
@@ -32,6 +34,7 @@ let rooms = {
 let summary = document.getElementsByClassName('summary');
 let timer = document.getElementsByClassName('timer')[0];
 let prepareTimer = new Date('2024', '02', '6', '0', '10');
+
 window.addEventListener('load', init);
 
 function init() {
@@ -54,6 +57,13 @@ function init() {
 
     nAdults.addEventListener('input', allowSend);
     nChilds.addEventListener('input', allowSend);
+
+    btnReserve.addEventListener('click', () =>{
+        successText.removeAttribute('hidden');
+        window.scrollBy(0, 100);
+    })
+    btnReset.addEventListener('click',resetForm);
+
 
     sRooms.addEventListener('input', () => {
         price.textContent = `Precio de la Habitación: ${document.querySelector('option:checked').value} €`
@@ -110,6 +120,8 @@ function allowSend() {
         uploadLocalStorage();
         summaryZone();
     }
+
+    successText.setAttribute('hidden', '');
 
     btnReserve.disabled = !allValid;
 }
@@ -203,4 +215,14 @@ function downloadLocalStorage() {
         }
     })  
 
+}
+
+function resetForm(){
+
+    fDate.valueAsDate = today;
+    eDate.valueAsDate = addDaysToDate(today, 1);
+    nAdults.value = 1;
+    nChilds.value = 0;
+    Array.from(document.querySelectorAll('option'))[0].setAttribute('selected','');
+    allowSend();
 }
