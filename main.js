@@ -36,14 +36,17 @@ window.addEventListener('load', init);
 
 function init() {
 
-    setInterval(timerCalculation , 1000)
+    loadSelect();
 
-    // playTimer = new Date(startTimer);
-    // console.log(playTimer.toLocaleTimeString());
-    // timerCalculation();
+    setInterval(timerCalculation, 1000);
 
-    fDate.valueAsDate = today;
-    eDate.valueAsDate = addDaysToDate(today, 1);
+    // if local storage exists we load it
+    if (localStorage.getItem('reserveForm')) {
+        downloadLocalStorage();
+    } else {
+        fDate.valueAsDate = today;
+        eDate.valueAsDate = addDaysToDate(today, 1);
+    }
 
 
     fDate.addEventListener('input', validityDate);
@@ -52,13 +55,12 @@ function init() {
     nAdults.addEventListener('input', allowSend);
     nChilds.addEventListener('input', allowSend);
 
-    loadSelect();
-
     sRooms.addEventListener('input', () => {
         price.textContent = `Precio de la Habitación: ${document.querySelector('option:checked').value} €`
         allowSend();
     })
-    summaryZone()
+
+    summaryZone();
 }
 
 
@@ -101,11 +103,15 @@ function allowSend() {
 
     // ----------VALIDITY-----------
 
-    let todosValidos = fields.every((field) => field.validity.valid);
+    let allValid = fields.every((field) => field.validity.valid);
 
-    if(todosValidos) summaryZone();
+    // When all fields its valids we save in local storage and create summary 
+    if (allValid) {
+        uploadLocalStorage();
+        summaryZone();
+    }
 
-    btnReserve.disabled = !todosValidos;
+    btnReserve.disabled = !allValid;
 }
 
 function loadSelect() {
@@ -130,33 +136,71 @@ function addDaysToDate(date, days) {
 }
 
 function summaryZone() {
-    summary[0].textContent = ` ((${nAdults.value} adultos * ${sRooms.value} € + ${nChilds.value} niños * ${sRooms.value/2} €) *  ${timeDifference()} días) = ${priceCalculation()}`;
-    summary[1].textContent =  ` ${priceCalculation()*21/100} €`;
-    summary[2].textContent = ` ${priceCalculation() + priceCalculation()*21/100} €`;
+    summary[0].textContent = ` ((${nAdults.value} adultos x ${sRooms.value} € + ${nChilds.value} niños x ${sRooms.value / 2} €) x  ${timeDifference()} días) = ${priceCalculation()}`;
+    summary[1].textContent = ` ${priceCalculation() * 21 / 100} €`;
+    summary[2].textContent = ` ${priceCalculation() + priceCalculation() * 21 / 100} €`;
 }
 
-function timeDifference(){
+function timeDifference() {
     let timeBefore = new Date(fDate.value);
     let timeAfter = new Date(eDate.value);
     let difference = timeAfter.getTime() - timeBefore.getTime();
 
     let hoursDifference = difference / 1000 / 60 / 60;
+
     //Return days difference
-    return Math.round(hoursDifference /24);
+    return Math.round(hoursDifference / 24);
 }
 
-function priceCalculation(){
-    return ((nAdults.value * sRooms.value + nChilds.value * sRooms.value/2) * timeDifference()); 
+function priceCalculation() {
+    return ((nAdults.value * sRooms.value + nChilds.value * sRooms.value / 2) * timeDifference());
 }
 
-function timerCalculation(){
+function timerCalculation() {
 
     prepareTimer.setTime(prepareTimer.getTime() - 1000);
 
-    if(prepareTimer.getMinutes() == 0 && prepareTimer.getSeconds() == 0){
+    if (prepareTimer.getMinutes() == 0 && prepareTimer.getSeconds() == 0) {
         location.reload()
     }
 
-    timer.textContent = `${prepareTimer.getMinutes()} : ${prepareTimer.getSeconds()}`
-    
+    timer.textContent = `${prepareTimer.getMinutes()} : ${prepareTimer.getSeconds()}`;
+
+}
+
+// ----------LOCAL STORAGE-----------
+
+function uploadLocalStorage() {
+    //Create JSON for save all fields values
+    const reserveForm = {
+        firstDate: fDate.value,
+        endDate: eDate.value,
+        numberAdults: nAdults.value,
+        numberChilds: nChilds.value,
+        //Save value selected 
+        tipeRoom: document.querySelector('option:checked').value,
+    }
+    //Transform the JSON object into a string to load it into local storage
+    localStorage.setItem('reserveForm', JSON.stringify(reserveForm));
+
+}
+
+function downloadLocalStorage() {
+    // Transform the string into a JSON object.
+    let fillForm = JSON.parse(localStorage.getItem('reserveForm'));
+
+    //Fill fields
+    fDate.value = fillForm.firstDate;
+    eDate.value = fillForm.endDate;
+    nAdults.value = fillForm.numberAdults;
+    nChilds.value = fillForm.numberChilds;
+
+    // Search type of room that we have saved and select it
+    Array.from(document.querySelectorAll('option')).map((a)=>{
+        if(a.value === fillForm.tipeRoom){
+            a.setAttribute('selected', '')
+            console.log(a);
+        }
+    })  
+
 }
