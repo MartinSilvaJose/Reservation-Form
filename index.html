@@ -24,32 +24,32 @@
                 <label>
                     Fecha de inicio de reserva:
                     <input required class="fDate" type="date">
-                    <span class="fDateError" role="alert"></span>
+                    <span class="fDateError error" role="alert"></span>
                 </label>
 
                 <label>
                     Fecha de fin de reserva:
                     <input  class="eDate" type="date" required>
-                    <span class="eDateError" role="alert"></span>
+                    <span class="eDateError error" role="alert"></span>
                 </label>
 
                 <label>
                     Número de personas adultas:
-                    <input class="nAdults" type="number" value=1 required><br>
-                    <span class="nAdultsError" role="alert"></span>
+                    <input class="nAdults" type="number" value=1 required>
+                    <span class="nAdultsError error" role="alert"></span>
                 </label>
 
                 <label>
                     Número de niños:
-                    <input class="nChilds" type="number" value=0 required><br>
-                    <span class="nChildsError" role="alert"></span>
+                    <input class="nChilds" type="number" value=0 required>
+                    <span class="nChildsError error" role="alert"></span>
                 </label>
 
                 <label>
                     Habitación: 
                     <select  class="sRooms" required>
-                    </select><br>
-                    <span class="nRoomsError" role="alert"></span>
+                    </select>
+                    <span class="nRoomsError error" role="alert"></span>
                 </label>
 
                 <p class="price"></p>
@@ -66,22 +66,22 @@
             <hr>
 
             <h3>Resumen:</h3>
-            <p>
-                <span class="summary" role="contentinfo"></span> <br>
-                <strong>21% IVA:</strong> <span class="summary" role="contentinfo"></span> <br>
-                <strong>Precio final:</strong><span class="summary" role="contentinfo"></span><br>
+            <p class="pSummary">
+                <span class="summary" role="contentinfo"></span> 
+                <strong>21% IVA:</strong> <span class="summary" role="contentinfo"></span> 
+                <strong>Precio final:</strong><span class="summary" role="contentinfo"></span>
             </p>
 
             
         </section>
-        <section>
+        <section class="sButtons">
             <button class="btnReserve" >Reservar</button>
             <button class="btnReset">Limpiar</button>
-            <p class="successText" hidden>Reserva realizada con exito.</p>
         </section>
-
-
     </main>
+    <footer>
+        <p class="successText" hidden>Reserva realizada con exito.</p>
+    </footer>
 
     <script src="main.js" async defer></script>
 </body>

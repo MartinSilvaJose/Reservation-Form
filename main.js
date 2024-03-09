@@ -58,8 +58,10 @@ function init() {
     nAdults.addEventListener('input', allowSend);
     nChilds.addEventListener('input', allowSend);
 
+    // Add events to buttons
     btnReserve.addEventListener('click', () =>{
         successText.removeAttribute('hidden');
+        //Move scroll to the success text
         window.scrollBy(0, 100);
     })
     btnReset.addEventListener('click',resetForm);
@@ -79,11 +81,11 @@ function validityDate() {
     if (thisDate < today) {
         this.setCustomValidity('La fecha debe de ser posterior a la de hoy');
 
-        this.classList.add('error');
+        this.classList.add('fieldError');
 
     } else {
         this.setCustomValidity('');
-        this.classList.remove('error');
+        this.classList.remove('fieldError');
     }
     if (this.className.split(' ')[0] === 'fDate') eDate.valueAsDate = addDaysToDate(thisDate, 1);
     document.querySelector(`.${this.className.split(' ')[0]}Error`).textContent = this.validationMessage;
@@ -100,9 +102,9 @@ function allowSend() {
     if (firstDate >= endDate) {
         eDate.setCustomValidity('La fecha final debe de ser posterior a la de inicio');
 
-        eDate.classList.add('error');
+        eDate.classList.add('.fieldError');
     } else {
-        eDate.classList.remove('error');
+        eDate.classList.remove('fieldError');
         eDate.setCustomValidity('');
     }
 
@@ -148,7 +150,7 @@ function addDaysToDate(date, days) {
 }
 
 function summaryZone() {
-    summary[0].textContent = ` ((${nAdults.value} adultos x ${sRooms.value} € + ${nChilds.value} niños x ${sRooms.value / 2} €) x  ${timeDifference()} días) = ${priceCalculation()}`;
+    summary[0].textContent = ` ((${nAdults.value} adultos x ${sRooms.value} € + ${nChilds.value} niños x ${sRooms.value / 2} €) x  ${timeDifference()} días) = ${priceCalculation()} €`;
     summary[1].textContent = ` ${priceCalculation() * 21 / 100} €`;
     summary[2].textContent = ` ${priceCalculation() + priceCalculation() * 21 / 100} €`;
 }
@@ -217,8 +219,10 @@ function downloadLocalStorage() {
 
 }
 
+
 function resetForm(){
 
+    //Reset fields for defaults
     fDate.valueAsDate = today;
     eDate.valueAsDate = addDaysToDate(today, 1);
     nAdults.value = 1;

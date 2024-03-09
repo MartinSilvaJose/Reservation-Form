@@ -1,36 +1,114 @@
+/* -------CONFIGURATION FOR DEFAULT-------- */
 * {
     box-sizing: border-box;
-    background-color: #ccc;
 }
-header{
+hr{
+    margin: 20px;
+}
+h1,h2,h3,h3,strong{color: #028b6e;
+}
+
+body{
+    background-color: #FFF6E9;
+}
+.error{
+    color:red;
+}
+.fieldError{
+    border-color: red;
+    background-color: rgb(213, 114, 114);
+}
+header, footer {
     text-align: center;
 }
 
+/* -------FIRST MOBILE-------- */
 main{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template: repeat(3, auto) /1fr;
+    gap: 20px;
+    color: #333;
 }
-
-
 section{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 20px;
+    border: 2px solid #40A2E3;
+    background: linear-gradient(#BBE2EC, #FFF6E9);
+}
+.sForm{
+    margin-left: 100px;
+    border-radius: 70px 70px 5px 70px ;
 }
 form{
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    
-}
-form input{
-    margin: 10px;
+    gap: 10px;
     width: 100%;
 }
-.sSummary{
+label{
+    align-self: center;
     text-align: center;
 }
-.error{
-    border-color: red;
-    background-color: rgb(213, 114, 114);
+input {
+    display: block;
+    margin: 20px auto;
+    border-color: #40A2E3;
+    border-radius: 5px;
+    background: linear-gradient(#daeef3, #FFF6E9);
+}
+select {
+    border: 2px solid #40A2E3;
+    border-radius: 5px;
+    background-color: #FFF6E9;
+}
+.price{
+    text-align: center;
+
+}
+.sSummary{
+    margin-right: 100px;
+    border-radius: 70px 70px 70px 5px;
+    text-align: center;
+}
+.pSummary span{
+    display: block;
+    margin: 5px;
+}
+.sButtons{
+    margin-left: 100px;
+    border-radius: 70px 70px 5px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+button{
+    width: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient( #FFF6E9, #daeef3);
+    border-color: #40A2E3;
+
+}
+button:hover{
+    transform: scale(1.2);
+    transition: .5s;
+}
+
+/* -------TABLETS-------- */
+@media (width >= 768px){
+    main{
+        grid-template: repeat(2,auto) / 2fr 1fr;
+    }
+    .sForm{
+        grid-row: span 2;
+    }
+}
+
+
+/* -------DESTOKS-------- */
+@media (width >= 1024px){
+    main{
+        grid-template: repeat(2,auto) / 2fr 1fr;
+    }
 }
