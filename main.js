@@ -109,10 +109,19 @@ function allowSend() {
     }
 
     // ----------PERSONS-----------
-    if (nAdults.value < 1) nAdults.value = 1;
+    if (nAdults.value < 0) nAdults.value = 0;
 
     if (nChilds.value < 0) nChilds.value = 0;
 
+    if(nAdults.value == 0){
+        nAdults.setCustomValidity('Tiene que haber al menos 1 adulto.');
+
+        nAdults.classList.add('fieldError');
+    } else {
+        nAdults.classList.remove('fieldError');
+        nAdults.setCustomValidity('');
+    }
+    document.querySelector('.nAdultsError').textContent = nAdults.validationMessage;
     // ----------VALIDITY-----------
 
     let allValid = fields.every((field) => field.validity.valid);
