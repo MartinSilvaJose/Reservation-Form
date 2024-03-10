@@ -111,13 +111,27 @@ button:hover{
 
 /* -------TABLETS-------- */
 @media (width >= 768px){
-
+    main{
+        grid-template: repeat(2,auto) / 2fr 1fr;
+    }
+    .sForm{
+        grid-row: span 2;
+        border-radius: 70px 5px 5px 70px;
+    }
+    .sButtons{
+        border-radius: 5px 5px 70px 5px;
+        margin: 0;
+        margin-right: 100px;
+    }
+    .sSummary{
+        border-radius: 5px 70px 5px 5px;
+    }
 }
 
 
 /* -------DESTOKS-------- */
-@media (width >= 1024px){
+/* @media (width >= 1024px){
     main{
         grid-template: repeat(2,auto) / 2fr 1fr;
     }
-}
+} */
